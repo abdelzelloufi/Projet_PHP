@@ -1,11 +1,32 @@
 <?php 
     $firstname = $name = $phone= $email=$message="";
+    $firstnameError = $nameError = $phoneError = $emailError = $messageError = "";
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $firstname=verifyInput($_POST["firstname"]);
         $name=verifyInput($_POST["name"]);
         $phone=verifyInput($_POST["phone"]);
         $email=verifyInput($_POST["email"]);
         $message=verifyInput($_POST["message"]);
+        if(empty($firstname))
+        {
+            $firstnameError="Je veux ton prénom !";
+        }
+        if(empty($name))
+        {
+            $nameError="Je veux ton nom également !";
+        }
+        if(empty($email))
+        {
+            $emailError="Ton mail, pour te contacter ;) ";
+        }
+        if(empty($phone))
+        {
+            $phoneError="Ton numéro, au cas où. ";
+        }
+        if(empty($message))
+        {
+            $messageError="Ton mail, pour te contacter ;) ";
+        }
     }
     function verifyInput($var){
         $var=trim($var);
@@ -39,28 +60,28 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="firstname">Prénom <span class="blue">*</span></label>
-                        <input id="firstname"type="text" name="firstname" class="form-control" placeholder="Votre prénom" value="<?php echo $firstname?>" >
-                        <p class="comment">Message d'erreur</p>
+                        <input id="firstname" type="text" name="firstname" class="form-control" placeholder="Votre prénom" value="<?php echo $firstname?>" >
+                        <p class="comment"><?php echo $firstnameError ?></p>
                     </div>
                     <div class="col-md-6">
                         <label for="name">Nom <span class="blue">*</span></label>
                         <input id="name" type="text" name="name" class="form-control" placeholder="Votre prénom" value="<?php echo $name?>" >
-                        <p class="comment">Message d'erreur</p>
+                        <p class="comment"><?php echo $nameError ?></p>
                     </div>
                     <div class="col-md-6">
                         <label for="email">E-mail <span class="blue">*</span></label>
-                        <input id="email"type="text" name="email" class="form-control" placeholder="Votre e-mail" value="<?php echo $email?>" >
-                        <p class="comment">Message d'erreur</p>
+                        <input id="email" type="text" name="email" class="form-control" placeholder="Votre e-mail" value="<?php echo $email?>" >
+                        <p class="comment"><?php echo $emailError ?></p>
                     </div>
                     <div class="col-md-6">
                         <label for="phone">Téléphone <span class="blue">*</span></label>
-                        <input id="phone" type="text" name="phone" class="form-control" placeholder="Votre numéro" value="<?php echo $phone?>">
-                        <p class="comment">Message d'erreur</p>
+                        <input id="phone" type="tel" name="phone" class="form-control" placeholder="Votre numéro" value="<?php echo $phone?>">
+                        <p class="comment"><?php echo $phoneError ?></p>
                     </div>
                     <div class="col-md-12">
                         <label for="message">Message <span class="blue">*</span></label>
                         <textarea id="message" name="message" class="form-control" placeholder="Votre message" value="<?php echo $message?>"></textarea>
-                        <p class="comment">Message d'erreur</p>
+                        <p class="comment"><?php echo $messageError ?></p>
                     </div>
                     <div class="col-md-12">
                         <p class="blue">* Ces informations sont requises.</p>
